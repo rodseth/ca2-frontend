@@ -1,28 +1,13 @@
 import "./style.css"
 import "bootstrap/dist/css/bootstrap.css"
-import "./jokeFacade"
-import jokeFacade from "./jokeFacade"
+import personFacade from "./personFacade"
+import zipFacade from "./zipFacade"
+import hobbyFacade from "./hobbyFacade"
+
 
 document.getElementById("all-content").style.display = "block"
 
-/* 
-  Add your JavaScript for all exercises Below or in separate js-files, which you must the import above
-*/
 
-/* JS For Exercise-1 below */
-
-
-/* JS For Exercise-2 below */
-
-
-
-/* JS For Exercise-3 below */
-
-
-/* 
-Do NOT focus on the code below, UNLESS you want to use this code for something different than
-the Period2-week2-day3 Exercises
-*/
 
 function hideAllShowOne(idToShow) {
   document.getElementById("about_html").style = "display:none"
