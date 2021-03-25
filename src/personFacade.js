@@ -9,8 +9,7 @@ const personFade = {
     addPerson,
     deletePerson,
     editPerson,
-    getPersonById,
-    getAllHobbies
+    getPersonById
 
 
 
