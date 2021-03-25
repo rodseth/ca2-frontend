@@ -4,8 +4,8 @@ URL = "http://localhost:3333/api/persons";
 const personFade = {
     getAllPersons,
     getPersonsWithGivenHobby,
-    getPersonsFromGivenZip,
-    getPersonsWithHobbyCount,
+    getPersonsFromGivenCity,
+    getPersonsByHobby,
     addPerson,
     deletePerson,
     editPerson,
@@ -23,20 +23,20 @@ function getAllPersons() {
 
 function getPersonsWithGivenHobby(hobby) {
     const options = makeOptions("GET")
-    return fetch(SERVER_URL + "peopByHobby/" + hobby)
+    return fetch(SERVER_URL + "hobby/" + hobby)
         .then(handleHttpErrors)
 }
 
-function getPersonsFromGivenZip(zip) {
+function getPersonsFromGivenCity(city) {
     const options = makeOptions("GET")
-    return fetch(SERVER_URL + "peopleByZip/" + zip)
+    return fetch(SERVER_URL + "city/" + city)
         .then(handleHttpErrors)
 
 }
 
-function getPersonsWithHobbyCount(hobby) {
+function getPersonsByHobby(hobby) {
     const options = makeOptions("GET")
-    return fetch(SERVER_URL + "peopleNumberByHobby/" + hobby)
+    return fetch(SERVER_URL + "count/" + hobby)
         .then(handleHttpErrors)
 
 }
