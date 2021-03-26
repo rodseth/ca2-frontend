@@ -10,25 +10,34 @@ document.getElementById("all-content").style.display = "block"
 
 
 function hideAllShowOne(idToShow) {
-  document.getElementById("about_html").style = "display:none"
-  document.getElementById("ex1_html").style = "display:none"
-  document.getElementById("ex2_html").style = "display:none"
-  document.getElementById("ex3_html").style = "display:none"
+  document.getElementById("home_html").style = "display:none"
+  document.getElementById("postnumre_html").style = "display:none"
+  document.getElementById("hobbies_html").style = "display:none"
+  document.getElementById("personer_html").style = "display:none"
+  document.getElementById("administrer_html").style = "display:none"
+  document.getElementById("search_html").style = "display:none"
   document.getElementById(idToShow).style = "display:block"
 }
 
 function menuItemClicked(evt) {
   const id = evt.target.id;
   switch (id) {
-    case "ex1": hideAllShowOne("ex1_html"); break
-    case "ex2": hideAllShowOne("ex2_html"); break
-    case "ex3": hideAllShowOne("ex3_html"); break
-    default: hideAllShowOne("about_html"); break
+    case "postnumre": hideAllShowOne("postnumre_html"); break
+    case "hobbies": hideAllShowOne("hobbies_html"); break
+    case "personer": hideAllShowOne("personer_html"); break
+    case "administrer": hideAllShowOne("administrer_html"); break
+    default: hideAllShowOne("home_html"); break
   }
   evt.preventDefault();
 }
+
+// function searchClicked(){
+//   hideAllShowOne("search_html");
+// }
+
 document.getElementById("menu").onclick = menuItemClicked;
-hideAllShowOne("about_html");
+document.getElementById("search").addEventListener("click", hideAllShowOne("search_html"));
+hideAllShowOne("home_html");
 
 
 
