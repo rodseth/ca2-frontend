@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.css"
 import personFacade from "./personFacade"
 import zipFacade from "./zipFacade"
 import hobbyFacade from "./hobbyFacade"
-
+import tableFiller from './tableFiller'
 let persons = [];
 
 
@@ -20,6 +20,16 @@ function hideAllShowOne(idToShow) {
   document.getElementById(idToShow).style = "display:block"
 }
 
+function makeTableRow(name){
+  const list = name.map(function (name){
+      return `<tr> <td> ${name.email}</td> <td>${name.firstName}</td> <td>${name.lastName}</td></tr>`
+  })
+  const tableheaders = "<tr><th>email</th><th>firstName</th><th>lastName</th></tr>"
+  const joinedResult = list.join("");
+  const finishedtable = tableheaders+joinedResult;
+  return finishedtable;
+}
+
 function getPeople(){
   fetch("http://localhost:8080/ca2/api/persons")
         .then(res=>res.json())
@@ -27,7 +37,13 @@ function getPeople(){
             document.getElementById("allPersons").innerHTML=makeTableRow(data);
         })
 }
-
+function getPersonByID(){
+  fetch("http://localhost:8080/ca2/api/persons/id/1")
+        .then(res=>res.json())
+        .then(data=> {
+            document.getElementById("allPersons").innerHTML=makeTableRow(data);
+        })
+}
 
 function menuItemClicked(evt) {
   const id = evt.target.id;
