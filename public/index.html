@@ -20,8 +20,8 @@
       <li><a href="" id="hobbies">Hobbies</a></li>
       <li><a href="" id="postnumre">Postnumre</a></li>
       <li><a href="" id="administrer">Administrer</a></li>
-      <li><b><input type="text" id="searchText"><button id="search">Search</button></b></li>
     </ul>
+    <!-- <b><input type="text" id="searchText"><button id="search">Search</button></b> -->
 
     <div class="content">
 
@@ -55,22 +55,24 @@
         <h3>Personer</h3>
         <p>Add your basic HTML for Exercise 3 here</p>
 
+        <div id="person-table"></div>
+
         <div class="row" style="min-height: 5em;">
       <div class=" col-md-8 pre-scrollable" style="background-color: lightgrey;">
           <h5>All Users</h5>
-          <table class="table">
+        <table id = "allPersons"></table>
+
+          <!-- <table class="table" id="personTable">
             <thead>
               <tr>
                 <th>Id</th>
                 <th>Age</th>
-                <th>Name
-                <th>
-                <th>Gender</th>
+                <th>Name</tr>
                 <th>Email </th>
             </thead>
             <tbody id="allUserRows">
             <tbody>
-          </table>
+          </table> -->
         </div>
         <div class="col-md-4" style="background-color: powderblue;">
           <h5>Find User</h5>
