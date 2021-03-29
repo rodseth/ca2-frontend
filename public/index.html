@@ -32,27 +32,33 @@
 
       <!-- This is were you should place your basic HTML for exercise-1 -->
       <div id="postnumre_html" style="display:none;">
-        <h3>Exercise 1</h3>
-        <p>Add your basic HTML for Exercise 1 here</p>
-        <ul id="jokes"></ul>
-
+        <h3>Zip Codes</h3>
+        
+        <input type="text" id="cityName" placeholder="City name"/> 
+        <button id="personsByZipSearch">Search</button>
+        <table class="table table-bordered" id="personsByZip"></table>
+      
+        <button id="getAllZips">Fetch all zipcodes</button>
+        <table class="table table-bordered" id="zipCodes"></table>
+        
+        
       </div>
       <!-- End of HTML for exercise-1 -->
       <div id="administrer_html" style="display: none;">
         <div class="row" style="min-height: 5em;">
           <div class="col-md-12" style="background-color: powderblue;">
-          <div class = "col-md-3">
-          <h5>Delete User by ID</h5>
-          </div>
-          <div class = "col-md-3">
-            <input type = "number", id="deletePersonID">
-          </div>
-          <div class = "col-md-3">
-           <input type = "button" id="deletePerson" value="delete"></input>
-          </div>
-            <div class = "col-md-3">
-          <p id="wasDeletedOrNot"></p>
-          </div>
+            <div class="col-md-3">
+              <h5>Delete User by ID</h5>
+            </div>
+            <div class="col-md-3">
+              <input type="number" , id="deletePersonID">
+            </div>
+            <div class="col-md-3">
+              <input type="button" id="deletePerson" value="delete"></input>
+            </div>
+            <div class="col-md-3">
+              <p id="wasDeletedOrNot"></p>
+            </div>
           </div>
         </div>
         <div class="row" style="min-height: 5em;">
@@ -70,8 +76,13 @@
 
       <!-- This is were you should place your basic HTML for exercise-2 -->
       <div id="hobbies_html" style="display:none;">
-        <h3>Exercise 2</h3>
-        <p id="ex2p">Add your basic HTML for Exercise 2 here</p>
+        <h3>Hobbies</h3>
+
+        <input type="text" id="hobbyName">
+        <button id="searchByHobby">Search</button>
+
+        <table class="table table-bordered" id="persons-with-hobby"></table>
+
       </div>
       <!-- End of HTML for exercise-2 -->
 
@@ -84,69 +95,75 @@
 
         <div class="row" style="min-height: 5em;">
           <div class=" col-md-12 pre-scrollable" style="background-color: powderblue;">
-          <h5>All Users</h5>
-        <table class="table table-bordered" id = "allPersons"></table>
-        </div>
+            <h5>All Users</h5>
+            <table class="table table-bordered" id="allPersons"></table>
           </div>
-          <div class="row" style="min-height: 5em;">
-           <div  class="col-md-12" style="background-color: whitesmoke;">
-            <div id="right" class="col-md-5" style="background-color: whitesmoke;"><h5>Find User by ID</h5></div>
-            <div  class="col-md-7" style="background-color: whitesmoke;"> 
-              
-              <input type="number" id="personID" value="">
-          <input type="button" id="search" value="search">
+        </div>
+        <div class="row" style="min-height: 5em;">
+          <div class="col-md-12" style="background-color: whitesmoke;">
+            <div id="right" class="col-md-5" style="background-color: whitesmoke;">
+              <h5>Find User by ID</h5>
             </div>
-         
-          
-          <table class="table table-bordered" id = "personByID"></table>
-          </div>
-      </div>
-      <div class="row" style="min-height: 5em;">
-        <div class="col-md-6" style="background-color: powderblue;">
-        <h5>Total amount of users</h5>
-        <p id=amountOfUsers></p>
-        </div>
-      
-        <div class="col-md-6" style="background-color: whitesmoke;">
-          
-          <h5>Number of people with given hobby</h5>
-          
-          <div class = "col-md-4">
-            <input type = "text", id="amountOfPeopleWithGivenHobby">
-          </div>
-          <div class = "col-md-4">
-           <input type = "button" id="searchHobby" value="search"></input>
-          </div>
-            <div class = "col-md-4">
-          <p id="amountOfPeopleWithGivenHobbyResult"></p>
-          </div>
-         
-          
-       
-        </div>
-        
-      </div>
-      
-      <!-- </div> -->
-      <!-- End of HTML for exercise-3 -->
+            <div class="col-md-7" style="background-color: whitesmoke;">
 
-      <!---- HTML for the About page -->
+              <input type="number" id="personID" value="">
+              <input type="button" id="search" value="search">
+            </div>
 
+
+            <table class="table table-bordered" id="personByID"></table>
+          </div>
+
+        </div>
+        <div class="row" style="min-height: 5em;">
+          <div class="col-md-6" style="background-color: powderblue;">
+            <h5>Total amount of users</h5>
+            <p id=amountOfUsers></p>
+          </div>
+
+          <div class="col-md-6" style="background-color: whitesmoke;">
+
+            <h5>Number of people with given hobby</h5>
+
+            <div class="col-md-4">
+              <input type="text" , id="amountOfPeopleWithGivenHobby">
+            </div>
+            <div class="col-md-4">
+              <input type="button" id="searchHobby" value="search"></input>
+            </div>
+            <div class="col-md-4">
+              <p id="amountOfPeopleWithGivenHobbyResult"></p>
+            </div>
+
+
+
+          </div>
+
+        </div>
+        <table class="table table-bordered" id="personByPhoneNumber"></table>
+        <input type="number" id="phoneNumber" placeholder="PhoneNumber"/> 
+        <button id="personByPhoneSearch">Search</button>
+
+        <!-- </div> -->
+        <!-- End of HTML for exercise-3 -->
+
+        <!---- HTML for the About page -->
+
+      </div>
+
+      <div id="home_html" style="display:none;">
+        <h3>About</h3>
+        <p>Watch the small video given as intro to this code, BEFORE you start using it</p>
+      </div>
+      <!-- End of HTML for ABOUT Page -->
+
+
+      <!--End of all content -->
     </div>
 
-    <div id="home_html" style="display:none;">
-      <h3>About</h3>
-      <p>Watch the small video given as intro to this code, BEFORE you start using it</p>
-    </div>
-    <!-- End of HTML for ABOUT Page -->
-
-
-    <!--End of all content -->
-  </div>
-
-  <!-- #################################################################-->
-  <!-- IMPORTANT  DO NOT IMPORT ANY JavaScript in this file by YOURSELF -->
-  <!-- #################################################################-->
+    <!-- #################################################################-->
+    <!-- IMPORTANT  DO NOT IMPORT ANY JavaScript in this file by YOURSELF -->
+    <!-- #################################################################-->
 
 </body>
 
