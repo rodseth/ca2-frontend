@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack/Babel-demo</title>
+  <title>Hobbies, persons and places</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 
@@ -17,10 +17,10 @@
   <div id="all-content" style="display: none;">
     <ul id="menu" class="header">
       <li><a href="" id="home">Home</a></li>
-      <li><a href="" id="personer">Personer</a></li>
+      <li><a href="" id="personer">Persons</a></li>
       <li><a href="" id="hobbies">Hobbies</a></li>
-      <li><a href="" id="postnumre">Postnumre</a></li>
-      <li><a href="" id="administrer">Administrer</a></li>
+      <li><a href="" id="postnumre">Zipcodes</a></li>
+      <li><a href="" id="administrer">Admin-site</a></li>
     </ul>
     <!-- <b><input type="text" id="searchText"><button id="search">Search</button></b> -->
 
@@ -39,7 +39,32 @@
       </div>
       <!-- End of HTML for exercise-1 -->
       <div id="administrer_html" style="display: none;">
-        <h3>placeholder for administrer</h3>
+        <div class="row" style="min-height: 5em;">
+          <div class="col-md-12" style="background-color: powderblue;">
+          <div class = "col-md-3">
+          <h5>Delete User by ID</h5>
+          </div>
+          <div class = "col-md-3">
+            <input type = "number", id="deletePersonID">
+          </div>
+          <div class = "col-md-3">
+           <input type = "button" id="deletePerson" value="delete"></input>
+          </div>
+            <div class = "col-md-3">
+          <p id="wasDeletedOrNot"></p>
+          </div>
+          </div>
+        </div>
+        <div class="row" style="min-height: 5em;">
+          <div class="col-md-12" style="background-color: whitesmoke;">
+            <h5>Add User</h5>
+          </div>
+        </div>
+        <div class="row" style="min-height: 5em;">
+          <div class="col-md-12" style="background-color: powderblue;">
+            <h5>Edit User</h5>
+          </div>
+        </div>
       </div>
 
 
@@ -53,43 +78,55 @@
 
       <!-- This is were you should place your basic HTML for exercise-3 -->
       <div id="personer_html" style="display:none;">
-        <h3>Personer</h3>
-        <p>Add your basic HTML for Exercise 3 here</p>
+        <h3 id="center">Personer</h3>
 
         <div id="person-table"></div>
 
         <div class="row" style="min-height: 5em;">
-      <div class=" col-md-8 pre-scrollable" style="background-color: lightgrey;">
+          <div class=" col-md-12 pre-scrollable" style="background-color: powderblue;">
           <h5>All Users</h5>
         <table class="table table-bordered" id = "allPersons"></table>
-
-          <!-- <table class="table" id="personTable">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Age</th>
-                <th>Name</tr>
-                <th>Email </th>
-            </thead>
-            <tbody id="allUserRows">
-            <tbody>
-          </table> -->
         </div>
-        <div class="col-md-4" style="background-color: powderblue;">
-          <h5>Find User</h5>
-        </div>
+          </div>
+          <div class="row" style="min-height: 5em;">
+           <div  class="col-md-12" style="background-color: whitesmoke;">
+            <div id="right" class="col-md-5" style="background-color: whitesmoke;"><h5>Find User by ID</h5></div>
+            <div  class="col-md-7" style="background-color: whitesmoke;"> 
+              
+              <input type="number" id="personID" value="">
+          <input type="button" id="search" value="search">
+            </div>
+         
+          
+          <table class="table table-bordered" id = "personByID"></table>
+          </div>
       </div>
       <div class="row" style="min-height: 5em;">
-        <div class="col-md-4" style="background-color: powderblue;">
-          <h5>Add User</h5>
+        <div class="col-md-6" style="background-color: powderblue;">
+        <h5>Total amount of users</h5>
+        <p id=amountOfUsers></p>
         </div>
-        <div class="col-md-4" style="background-color: lightgrey;">
-          <h5>Edit User</h5>
+      
+        <div class="col-md-6" style="background-color: whitesmoke;">
+          
+          <h5>Number of people with given hobby</h5>
+          
+          <div class = "col-md-4">
+            <input type = "text", id="amountOfPeopleWithGivenHobby">
+          </div>
+          <div class = "col-md-4">
+           <input type = "button" id="searchHobby" value="search"></input>
+          </div>
+            <div class = "col-md-4">
+          <p id="amountOfPeopleWithGivenHobbyResult"></p>
+          </div>
+         
+          
+       
         </div>
-        <div class="col-md-4" style="background-color: powderblue;">
-          <h5>Delete User</h5>
-        </div>
+        
       </div>
+      
       <!-- </div> -->
       <!-- End of HTML for exercise-3 -->
 

@@ -44,3 +44,9 @@ ul.header li a:hover:not(.active) {
   height: 1000px;
   font-size: small;
 }
+#right {
+  text-align: right;
+}
+#center {
+  text-align: center;
+}
