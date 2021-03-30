@@ -188,6 +188,18 @@ function makeHobbyArray(hobbiesArr){
   })
   autocomplete(document.getElementById("hobbyInput"), hobbies);
 }
+function addHobbyToList(hobby){
+  const list = hobby.map(function(hobby){
+    return `<li>${hobby}</li>`;
+  })
+
+  document.getElementById("hobbyList").innerHTML = list;
+}
+let chosenHobbies = [];
+function addHobbyToArray(hobby){
+  chosenHobbies.push(hobby);
+  addHobbyToList(chosenHobbies);
+}
 
 function menuItemClicked(evt) {
   const id = evt.target.id;
@@ -228,6 +240,8 @@ function menuItemClicked(evt) {
 
       populateHobbyarray();
 
+      document.getElementById("addHobbyBtn").onclick = () => addHobbyToArray(document.getElementById("hobbyInput").value);
+      
       break
 
     default: hideAllShowOne("home_html");
@@ -347,3 +361,33 @@ document.addEventListener("click", function (e) {
     closeAllLists(e.target);
 });
 }
+
+document.getElementById("createPerson").onclick.submit(function() {
+      $.ajax({
+          type: 'POST',
+          url: 'http://localhost:8080/ca2/api/persons/create/',
+          data: { email: "hej",
+          firstName: "dw",
+          lastName : "wda" ,
+          phonesDTO: [
+            {
+            phoneNumber: "483927398",
+            typeOfNumber: "home"
+            }
+            ],
+            addressesDTO: {
+            street: "Street",
+            additionalInfo: "Additional"
+            },
+            hobbiesDTO: [
+            {
+            name: "Fodbold",
+            wikiLink: "spark til bolden og fake skader",
+            category: "boldspill",
+            type: "teamsport"
+            }
+          ]
+        }
+      });
+      return false;
+  }); 

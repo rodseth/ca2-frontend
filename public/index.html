@@ -67,14 +67,16 @@
 
         <div class="row" style="min-height: 5em;">
           <div class="col-md-4">
-            <div class="col-md-6" style="padding-left: 0">
-              <label for="personFirstName">First name</label>
-              <input type="text" id="personFirstName" class="stretchToFit">
-            </div>
-            <div class="col-md-6" style="padding-right: 0">
-              <label for="personLastName">Last name</label>
-              <input type="text" id="personLastName" class="stretchToFit">
-            </div>
+            <form id="createPerson" action="" method="POST">
+              <div class="col-md-6" style="padding-left: 0">
+                <label for="personFirstName">First name</label>
+                <input type="text" id="personFirstName" class="stretchToFit">
+              </div>
+              <div class="col-md-6" style="padding-right: 0">
+                <label for="personLastName">Last name</label>
+                <input type="text" id="personLastName" class="stretchToFit">
+              </div>
+            </form>
           </div>
           <div class="col-md-4">
           </div>
@@ -90,52 +92,32 @@
 
         <div class="row" style="min-height: 5em;">
           <div class="col-md-4">
-
-            <label for="personEmail">email</label>
-            <br>
-            <input type="email" id="personEmail" class="stretchToFit">
-
-
-          </div>
-          <div class="col-md-4">
-          </div>
-          <div class="col-md-4">
-
-
-
-          </div>
-        </div>
-        <div class="row" style="min-height: 5em;">
-          <div class="col-md-4">
-             
-                <div class="autocomplete">
-                  <label for="cityInput">City</label>
-                  <br>
-                  <input id="cityInput" type="text" name="cityInput" placeholder="City or zip goes here" class="stretchToFit">
-                </div>
-           
-           
-          </div>
-          <div class="col-md-4">
-          </div>
-          <div class="col-md-4">
-
-
-
-          </div>
-        </div>
-        <div class="row" style="min-height: 5em;">
-          <div class="col-md-4">
-            <div class="col-md-9" style="padding-left:0">
-              <label for="addressInput">Address</label>
+            <form id="createPerson" action="" method="POST">
+              <label for="personEmail">email</label>
               <br>
-              <input type="text" id="addressInput" class="stretchToFit">
-            </div>
-            <div class="col-md-3" style="padding-right:0">
-              <label for="addressNumberInput">Nr</label>
-              <br>
-              <input type="text" id="addressNumberInput" class="stretchToFit">
-            </div>
+              <input type="email" id="personEmail" class="stretchToFit">
+            </form>
+
+          </div>
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+            <p id="wasDeletedOrNot"></p>
+
+
+          </div>
+        </div>
+        <div class="row" style="min-height: 5em;">
+          <div class="col-md-4">
+            <form id="createPerson" action="" method="POST">
+              <div class="autocomplete">
+                <label for="cityInput">City</label>
+                <br>
+                <input id="cityInput" type="text" name="cityInput" placeholder="City or zip goes here"
+                  class="stretchToFit">
+              </div>
+            </form>
+
           </div>
           <div class="col-md-4">
           </div>
@@ -147,83 +129,117 @@
         </div>
         <div class="row" style="min-height: 5em;">
           <div class="col-md-4">
+
+            <form id="createPerson" action="" method="POST">
+              <div class="col-md-9" style="padding-left:0">
+                <label for="addressInput">Address</label>
+                <br>
+                <input type="text" id="addressInput" class="stretchToFit">
+              </div>
+              <div class="col-md-3" style="padding-right:0">
+                <label for="addressNumberInput">Nr</label>
+                <br>
+                <input type="text" id="addressNumberInput" class="stretchToFit">
+              </div>
+            </form>
+          </div>
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+
+
+
+          </div>
+        </div>
+        <div class="row" style="min-height: 5em;">
+          <div class="col-md-4">
+            <form id="createPerson" action="" method="POST">
+              <div class="col-md-8" style="padding-left: 0">
+                <label for="phoneNrInput">Phone number</label>
+                <br>
+                <input type="number" id="phoneNrInput" class="stretchToFit">
+              </div>
+              <div class="col-md-2" style="padding-right: 0">
+                <label for="homeRadio">Home</label>
+                <br>
+                <input type="radio" id="homeRadio" name="phoneRadio" value="home" class="stretchToFit">
+              </div>
+              <div class="col-md-2" style="padding-right: 0">
+                <label for="mobileRadio">Mobile</label>
+                <br>
+                <input type="radio" id="mobileRadio" name="phoneRadio" value="mobile" class="stretchToFit">
+              </div>
+            </form>
+          </div>
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+
+
+
+          </div>
+
+        </div>
+        <div class="row" style="min-height: 5em;">
+          <div class="col-md-4">
+
             <div class="col-md-8" style="padding-left: 0">
-              <label for="phoneNrInput">Phone number</label>
-              <br>
-              <input type="number" id="phoneNrInput" class="stretchToFit">
-            </div>
-            <div class="col-md-2" style="padding-right: 0">
-              <label for="homeRadio">Home</label>
-              <br>
-              <input type="radio" id="homeRadio" name="phoneRadio" value="home" class="stretchToFit">
-            </div>
-            <div class="col-md-2" style="padding-right: 0">
-              <label for="mobileRadio">Mobile</label>
-              <br>
-              <input type="radio" id="mobileRadio" name="phoneRadio" value="mobile" class="stretchToFit">
-            </div>
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-4">
 
-
-
-            </div>
-          </div>
-        </div>
-        <div class="row" style="min-height: 5em;">
-          <div class="col-md-4">
-
-            <div class="col-md-8" style="padding-left: 0">
-             
-                <div class="autocomplete">
-                  <label for="hobbyInput">Hobby</label>
-                  <br>
-                  <input id="hobbyInput" type="text" name="myHobby" placeholder="Hobby" class="stretchToFit">
-                </div>
+              <div class="autocomplete">
+                <label for="hobbyInput">Hobby</label>
+                <br>
+                <input id="hobbyInput" type="text" name="myHobby" placeholder="Hobby" class="stretchToFit">
+              </div>
             </div>
             <div class="col-md-4" style="padding-right: 0">
               <br>
-              <input type="button" value="add" class="stretchToFit" style="margin-top: 5px">
+              <input id="addHobbyBtn" type="button" value="add" class="stretchToFit" style="margin-top: 5px">
             </div>
-            
 
 
           </div>
+          
           <div class="col-md-4">
           </div>
           <div class="col-md-4">
+          </div>
+          </div>
+          <div class="row" style="min-height: 5em;">
+            <div class="col-md-4">
 
-            <div class="row" style="min-height: 5em;">
               <div class="col-md-4">
-    
-                <div class="col-md-8" style="padding-left: 0">
-                 
-                    <div class="autocomplete">
-                      <label for="hobbyInput">Hobby</label>
-                      <br>
-                      <input id="hobbyInput" type="text" name="myHobby" placeholder="Hobby" class="stretchToFit">
-                    </div>
-                </div>
-                <div class="col-md-4" style="padding-right: 0">
-                  <br>
-                  <input type="button" value="add" class="stretchToFit" style="margin-top: 5px">
-                </div>
-                
-    
-    
+                <label for="hobbyList">Chosen hobbies:</label>
               </div>
               <div class="col-md-4">
+                <ul id="hobbyList">
+
+                </ul>
+                <form id="createPerson" action="" method="POST">
+                  <input type="hidden">
+                </form>
               </div>
-              <div class="col-md-4">
-    
-    
-    
-
-
-
+            </div>
+          
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
           </div>
         </div>
+          <div class="row" style="min-height: 5em;">
+            <div class="col-md-4">
+              <form id="createPerson" action="" method="POST">
+              <input type="submit" name="Submit" value="Submit" form="createPerson" />
+              </form>
+            </div>
+
+
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+            </div>
+          </div>
+
+        
       </div>
 
 
