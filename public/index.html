@@ -33,42 +33,195 @@
       <!-- This is were you should place your basic HTML for exercise-1 -->
       <div id="postnumre_html" style="display:none;">
         <h3>Zip Codes</h3>
-        
-        <input type="text" id="cityName" placeholder="City name"/> 
+
+        <input type="text" id="cityName" placeholder="City name" />
         <button id="personsByZipSearch">Search</button>
         <table class="table table-bordered" id="personsByZip"></table>
-      
+
         <button id="getAllZips">Fetch all zipcodes</button>
         <table class="table table-bordered" id="zipCodes"></table>
-        
-        
+
+
       </div>
       <!-- End of HTML for exercise-1 -->
       <div id="administrer_html" style="display: none;">
         <div class="row" style="min-height: 5em;">
-          <div class="col-md-12" style="background-color: powderblue;">
-            <div class="col-md-3">
-              <h5>Delete User by ID</h5>
-            </div>
-            <div class="col-md-3">
-              <input type="number" , id="deletePersonID">
-            </div>
-            <div class="col-md-3">
-              <input type="button" id="deletePerson" value="delete"></input>
-            </div>
-            <div class="col-md-3">
-              <p id="wasDeletedOrNot"></p>
-            </div>
-          </div>
-        </div>
-        <div class="row" style="min-height: 5em;">
-          <div class="col-md-12" style="background-color: whitesmoke;">
+
+          <div class="col-md-4" id="center">
             <h5>Add User</h5>
           </div>
+
+
+          <div class="col-md-4" id="center">
+            <h5>Edit User</h5>
+          </div>
+          <div class="col-md-4" id="center">
+
+            <h5>Delete User by ID</h5>
+
+
+
+          </div>
+        </div>
+
+
+        <div class="row" style="min-height: 5em;">
+          <div class="col-md-4">
+            <div class="col-md-6" style="padding-left: 0">
+              <label for="personFirstName">First name</label>
+              <input type="text" id="personFirstName" class="stretchToFit">
+            </div>
+            <div class="col-md-6" style="padding-right: 0">
+              <label for="personLastName">Last name</label>
+              <input type="text" id="personLastName" class="stretchToFit">
+            </div>
+          </div>
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+            <div class="col-md-6">
+              <input type="number" , id="deletePersonID">
+            </div>
+            <div class="col-md-6">
+              <input type="button" id="deletePerson" value="delete"></input>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="min-height: 5em;">
+          <div class="col-md-4">
+
+            <label for="personEmail">email</label>
+            <br>
+            <input type="email" id="personEmail" class="stretchToFit">
+
+
+          </div>
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+
+
+
+          </div>
         </div>
         <div class="row" style="min-height: 5em;">
-          <div class="col-md-12" style="background-color: powderblue;">
-            <h5>Edit User</h5>
+          <div class="col-md-4">
+             
+                <div class="autocomplete">
+                  <label for="cityInput">City</label>
+                  <br>
+                  <input id="cityInput" type="text" name="cityInput" placeholder="City or zip goes here" class="stretchToFit">
+                </div>
+           
+           
+          </div>
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+
+
+
+          </div>
+        </div>
+        <div class="row" style="min-height: 5em;">
+          <div class="col-md-4">
+            <div class="col-md-9" style="padding-left:0">
+              <label for="addressInput">Address</label>
+              <br>
+              <input type="text" id="addressInput" class="stretchToFit">
+            </div>
+            <div class="col-md-3" style="padding-right:0">
+              <label for="addressNumberInput">Nr</label>
+              <br>
+              <input type="text" id="addressNumberInput" class="stretchToFit">
+            </div>
+          </div>
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+
+
+
+          </div>
+        </div>
+        <div class="row" style="min-height: 5em;">
+          <div class="col-md-4">
+            <div class="col-md-8" style="padding-left: 0">
+              <label for="phoneNrInput">Phone number</label>
+              <br>
+              <input type="number" id="phoneNrInput" class="stretchToFit">
+            </div>
+            <div class="col-md-2" style="padding-right: 0">
+              <label for="homeRadio">Home</label>
+              <br>
+              <input type="radio" id="homeRadio" name="phoneRadio" value="home" class="stretchToFit">
+            </div>
+            <div class="col-md-2" style="padding-right: 0">
+              <label for="mobileRadio">Mobile</label>
+              <br>
+              <input type="radio" id="mobileRadio" name="phoneRadio" value="mobile" class="stretchToFit">
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+
+
+
+            </div>
+          </div>
+        </div>
+        <div class="row" style="min-height: 5em;">
+          <div class="col-md-4">
+
+            <div class="col-md-8" style="padding-left: 0">
+             
+                <div class="autocomplete">
+                  <label for="hobbyInput">Hobby</label>
+                  <br>
+                  <input id="hobbyInput" type="text" name="myHobby" placeholder="Hobby" class="stretchToFit">
+                </div>
+            </div>
+            <div class="col-md-4" style="padding-right: 0">
+              <br>
+              <input type="button" value="add" class="stretchToFit" style="margin-top: 5px">
+            </div>
+            
+
+
+          </div>
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+
+            <div class="row" style="min-height: 5em;">
+              <div class="col-md-4">
+    
+                <div class="col-md-8" style="padding-left: 0">
+                 
+                    <div class="autocomplete">
+                      <label for="hobbyInput">Hobby</label>
+                      <br>
+                      <input id="hobbyInput" type="text" name="myHobby" placeholder="Hobby" class="stretchToFit">
+                    </div>
+                </div>
+                <div class="col-md-4" style="padding-right: 0">
+                  <br>
+                  <input type="button" value="add" class="stretchToFit" style="margin-top: 5px">
+                </div>
+                
+    
+    
+              </div>
+              <div class="col-md-4">
+              </div>
+              <div class="col-md-4">
+    
+    
+    
+
+
+
           </div>
         </div>
       </div>
@@ -94,17 +247,17 @@
         <div id="person-table"></div>
 
         <div class="row" style="min-height: 5em;">
-          <div class=" col-md-12 pre-scrollable" style="background-color: powderblue;">
+          <div class=" col-md-12 pre-scrollable">
             <h5>All Users</h5>
             <table class="table table-bordered" id="allPersons"></table>
           </div>
         </div>
         <div class="row" style="min-height: 5em;">
-          <div class="col-md-12" style="background-color: whitesmoke;">
-            <div id="right" class="col-md-5" style="background-color: whitesmoke;">
+          <div class="col-md-12">
+            <div id="right" class="col-md-5">
               <h5>Find User by ID</h5>
             </div>
-            <div class="col-md-7" style="background-color: whitesmoke;">
+            <div class="col-md-7">
 
               <input type="number" id="personID" value="">
               <input type="button" id="search" value="search">
@@ -116,12 +269,12 @@
 
         </div>
         <div class="row" style="min-height: 5em;">
-          <div class="col-md-6" style="background-color: powderblue;">
+          <div class="col-md-6">
             <h5>Total amount of users</h5>
             <p id=amountOfUsers></p>
           </div>
 
-          <div class="col-md-6" style="background-color: whitesmoke;">
+          <div class="col-md-6">
 
             <h5>Number of people with given hobby</h5>
 
@@ -140,10 +293,19 @@
           </div>
 
         </div>
-        <table class="table table-bordered" id="personByPhoneNumber"></table>
-        <input type="number" id="phoneNumber" placeholder="PhoneNumber"/> 
-        <button id="personByPhoneSearch">Search</button>
+        <div class="row" style="min-height: 5em;">
+          <div class="col-md-12">
+            <div id="right" class="col-md-5">
+              <h5>Find User by phonenumber</h5>
+            </div>
 
+            <div class="col-md-7">
+              <input type="number" id="phoneNumber" placeholder="PhoneNumber" />
+              <input type="button" id="personByPhoneSearch" value="search"></button>
+            </div>
+            <table class="table table-bordered" id="personByPhoneNumber"></table>
+          </div>
+        </div>
         <!-- </div> -->
         <!-- End of HTML for exercise-3 -->
 
