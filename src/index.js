@@ -366,28 +366,37 @@ document.getElementById("createPerson").onclick.submit(function() {
       $.ajax({
           type: 'POST',
           url: 'http://localhost:8080/ca2/api/persons/create/',
-          data: { email: "hej",
-          firstName: "dw",
-          lastName : "wda" ,
-          phonesDTO: [
-            {
-            phoneNumber: "483927398",
-            typeOfNumber: "home"
-            }
-            ],
-            addressesDTO: {
-            street: "Street",
-            additionalInfo: "Additional"
-            },
-            hobbiesDTO: [
-            {
-            name: "Fodbold",
-            wikiLink: "spark til bolden og fake skader",
-            category: "boldspill",
-            type: "teamsport"
-            }
-          ]
-        }
+          data: ({ 
+            email: "hej",
+              firstName: "dw",
+              lastName: "wda",
+              addressesDTO: {
+                  street: "Street2",
+                  additionalInfo: "Additional"
+                   },
+                   
+              phonesDTO: [
+                      {
+                  phoneNumber: 4112111,
+                  typeOfNumber: "home"
+                  }
+              ],
+              hobbiesDTO: [
+                      {
+                  name: "Fodbold",
+                  wikiLink: "spark til bolden og fake skader",
+                  category: "boldspill",
+                  type: "teamsport"
+                      }
+                    ],
+              cityInfoDTO: {
+                zip: "2830",
+                cityName: "Virum"
+              }
+            
+                  }),
+                  contentType: "application/json",
+                  dataType: "json"
       });
       return false;
   }); 
