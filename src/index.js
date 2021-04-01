@@ -165,11 +165,28 @@ function populateCityarray() {
     })
     
 }
+function populateCityarrayForZipsearch() {
+  
+  fetch("http://localhost:8080/ca2/api/zipcodes/")
+    .then(res => res.json())
+    .then(data => {
+      cities = makeArrayForFindingZip(data);
+    })
+    
+}
 function makeArray(cityArr){
   cities = cityArr.map(function(city){
     return `${city.cityName}, ${city.zip}`
   })
   autocomplete(document.getElementById("cityInput"), cities);
+  autocomplete(document.getElementById("cityInputEdit"), cities);
+}
+function makeArrayForFindingZip(cityArr){
+  cities = cityArr.map(function(city){
+    return `${city.cityName}, ${city.zip}`
+  })
+  autocomplete(document.getElementById("cityName"), cities);
+  
 }
 let hobbies = [];
 
@@ -187,6 +204,7 @@ function makeHobbyArray(hobbiesArr){
     return `${hobby.name}`
   })
   autocomplete(document.getElementById("hobbyInput"), hobbies);
+  autocomplete(document.getElementById("hobbyInputEdit"), hobbies);
 }
 function addHobbyToList(hobby){
   const list = hobby.map(function(hobby){
@@ -205,7 +223,7 @@ function menuItemClicked(evt) {
   const id = evt.target.id;
   switch (id) {
     case "postnumre": hideAllShowOne("postnumre_html");
-
+      populateCityarrayForZipsearch(); 
       document.getElementById("personsByZipSearch").onclick = () => getPersonsByZip();
       document.getElementById("getAllZips").onclick = () => getAllZips();
 
@@ -241,6 +259,46 @@ function menuItemClicked(evt) {
       populateHobbyarray();
 
       document.getElementById("addHobbyBtn").onclick = () => addHobbyToArray(document.getElementById("hobbyInput").value);
+
+
+      document.getElementById("createPerson").onclick = () => submit(function() {
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/ca2/api/persons/create/',
+            data: ({ 
+              email: "hej",
+                firstName: "dw",
+                lastName: "wda",
+                addressesDTO: {
+                    street: "Street2",
+                    additionalInfo: "Additional"
+                     },
+                     
+                phonesDTO: [
+                        {
+                    phoneNumber: 4112111,
+                    typeOfNumber: "home"
+                    }
+                ],
+                hobbiesDTO: [
+                        {
+                    name: "Fodbold",
+                    wikiLink: "spark til bolden og fake skader",
+                    category: "boldspill",
+                    type: "teamsport"
+                        }
+                      ],
+                cityInfoDTO: {
+                  zip: "2830",
+                  cityName: "Virum"
+                }
+              
+                    }),
+                    contentType: "application/json",
+                    dataType: "json"
+        });
+        return false;
+    }); 
       
       break
 
@@ -361,13 +419,16 @@ document.addEventListener("click", function (e) {
     closeAllLists(e.target);
 });
 }
-
-document.getElementById("createPerson").onclick.submit(function() {
-      $.ajax({
-          type: 'POST',
-          url: 'http://localhost:8080/ca2/api/persons/create/',
-          data: ({ 
-            email: "hej",
+/*
+document.getElementById("createPerson").onclick =  () => (function post(){
+  let options = {
+    method: "POST",
+    headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+                },
+  body: JSON.stringify({
+    email: "hej",
               firstName: "dw",
               lastName: "wda",
               addressesDTO: {
@@ -377,7 +438,7 @@ document.getElementById("createPerson").onclick.submit(function() {
                    
               phonesDTO: [
                       {
-                  phoneNumber: 4112111,
+                  phoneNumber: 4112666,
                   typeOfNumber: "home"
                   }
               ],
@@ -394,9 +455,9 @@ document.getElementById("createPerson").onclick.submit(function() {
                 cityName: "Virum"
               }
             
-                  }),
-                  contentType: "application/json",
-                  dataType: "json"
-      });
-      return false;
-  }); 
+                  })
+  }
+  fetch("http://localhost:8080/ca2/api/persons/create/", options).then(response => response.json()).then(json =>console.log(json)).catch(err=>console.log(err));
+}
+)*/
+
