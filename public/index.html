@@ -336,10 +336,17 @@
       <!-- This is were you should place your basic HTML for exercise-2 -->
       <div id="hobbies_html" style="display:none;">
         <h3>Hobbies</h3>
-
+        <div class="row">
+        <div class="col-md-8" style="padding-left: 10px">
+          <div class="autocomplete stretchToFit">
         <input type="text" id="hobbyName">
-        <button id="searchByHobby">Search</button>
-
+        </div>
+        </div>
+        <div class="col-md-4">
+        <input type="button" id="searchByHobby" value="Search" class="stretchToFit">
+      </div>
+</div>
+  
         <table class="table table-bordered" id="persons-with-hobby"></table>
 
       </div>

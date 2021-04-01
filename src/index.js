@@ -205,6 +205,7 @@ function makeHobbyArray(hobbiesArr){
   })
   autocomplete(document.getElementById("hobbyInput"), hobbies);
   autocomplete(document.getElementById("hobbyInputEdit"), hobbies);
+  autocomplete(document.getElementById("hobbyName"), hobbies);
 }
 function addHobbyToList(hobby){
   const list = hobby.map(function(hobby){
@@ -230,7 +231,7 @@ function menuItemClicked(evt) {
       break
 
     case "hobbies": hideAllShowOne("hobbies_html");
-
+      populateHobbyarray();
 
       document.getElementById("searchByHobby").addEventListener("click", getPeopleWithHobby);
 
