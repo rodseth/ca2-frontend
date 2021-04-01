@@ -79,7 +79,7 @@
 
         <div class="row" style="min-height: 5em;">
           <div class="col-md-4">
-            <form id="createPerson" action="" method="POST">
+            <form id="createPerson">
               <div class="col-md-6" style="padding-left: 0">
                 <label for="personFirstName">First name</label>
                 <input type="text" id="personFirstName" class="stretchToFit">
@@ -117,16 +117,16 @@
 
         <div class="row" style="min-height: 5em;">
           <div class="col-md-4">
-            <form id="createPerson" action="" method="POST">
+            <form id="createPerson">
               <label for="personEmail">email</label>
               <br>
               <input type="email" id="personEmail" class="stretchToFit">
             </form>
 
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4" id="nameEditDiv">
             <div class="col-md-6" style="padding-left: 0">
-              <label for="personFirstNameEdit">First name</label>
+              <label  for="personFirstNameEdit">First name</label>
               <input type="text" id="personFirstNameEdit" class="stretchToFit">
             </div>
             <div class="col-md-6" style="padding-right: 0">
@@ -144,7 +144,7 @@
         </div>
         <div class="row" style="min-height: 5em;">
           <div class="col-md-4">
-            <form id="createPerson" action="" method="POST">
+            <form id="createPerson" >
               <div class="autocomplete">
                 <label for="cityInput">City</label>
                 <br>
@@ -154,7 +154,7 @@
             </form>
 
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4" id="emailEditDiv">
             <label for="personEmailEdit">email</label>
             <br>
             <input type="email" id="personEmailEdit" class="stretchToFit">
@@ -168,7 +168,7 @@
         <div class="row" style="min-height: 5em;">
           <div class="col-md-4">
 
-            <form id="createPerson" action="" method="POST">
+            <form id="createPerson">
               <div class="col-md-9" style="padding-left:0">
                 <label for="addressInput">Address</label>
                 <br>
@@ -183,7 +183,7 @@
           </div>
 
 
-          <div class="col-md-4">
+          <div class="col-md-4" id="cityEditDiv">
 
             <div class="autocomplete">
               <label for="cityInputEdit">City</label>
@@ -200,7 +200,7 @@
         </div>
         <div class="row" style="min-height: 5em;">
           <div class="col-md-4">
-            <form id="createPerson" action="" method="POST">
+            <form id="createPerson">
               <div class="col-md-8" style="padding-left: 0">
                 <label for="phoneNrInput">Phone number</label>
                 <br>
@@ -218,7 +218,8 @@
               </div>
             </form>
           </div>
-          <div class="col-md-4">
+
+          <div class="col-md-4" id="addressEditDiv">
             <div class="col-md-9" style="padding-left:0">
               <label for="addressInputEdit">Address</label>
               <br>
@@ -256,9 +257,9 @@
 
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-4" id="phoneEditDiv">
 
-            <div class="col-md-8" style="padding-left: 0">
+            <div class="col-md-6" style="padding-left: 0">
               <label for="phoneNrInputEdit">Phone number</label>
               <br>
               <input type="number" id="phoneNrInputEdit" class="stretchToFit">
@@ -266,12 +267,18 @@
             <div class="col-md-2" style="padding-right: 0">
               <label for="homeRadioEdit">Home</label>
               <br>
-              <input type="radio" id="homeRadioEdit" name="phoneRadioEdit" value="home" class="stretchToFit">
+              
+              <input type="radio" id="homeRadioEdit" name="phoneRadioEdit" value="home" class="stretchToFit" style=" margin-top: 5px;">
             </div>
             <div class="col-md-2" style="padding-right: 0">
               <label for="mobileRadioEdit">Mobile</label>
               <br>
-              <input type="radio" id="mobileRadioEdit" name="phoneRadioEdit" value="mobile" class="stretchToFit">
+              
+              <input type="radio" id="mobileRadioEdit" name="phoneRadioEdit" value="mobile" class="stretchToFit" style=" margin-top: 5px;">
+            </div>
+            <div class="col-md-2">
+              <br>
+              <input type="button" id="addPhoneForEditBtn" value="Add" style="margin-top: 5px;">
             </div>
 
           </div>
@@ -288,13 +295,30 @@
               <ul id="hobbyList">
 
               </ul>
-              <form id="createPerson" action="" method="POST">
+              <form id="createPerson">
                 <input type="hidden">
               </form>
             </div>
           </div>
 
+          <div class="col-md-4" id="phoneEditTableDiv">
+            <table class=" table table-bordered" id="phoneEditTable"></table>
+          </div>
+
           <div class="col-md-4">
+          </div>
+
+        </div>
+
+        <div class="row" style="min-height: 5em;">
+          <div class="col-md-4">
+            <form id="createPerson">
+              <input type="button" name="Submit" value="Submit" form="createPerson" id="creeateUserBtn">
+            </form>
+          </div>
+
+
+          <div class="col-md-4" id="hobbyEditDiv">
 
             <div class="col-md-8" style="padding-left: 0">
 
@@ -308,26 +332,41 @@
               <br>
               <input id="addHobbyBtnEdit" type="button" value="add" class="stretchToFit" style="margin-top: 5px">
             </div>
-
           </div>
           <div class="col-md-4">
           </div>
         </div>
         <div class="row" style="min-height: 5em;">
           <div class="col-md-4">
-            <form id="createPerson" action="" method="POST">
-              <input type="submit" name="Submit" value="Submit" form="createPerson">
-            </form>
+    
           </div>
 
 
+          <div class="col-md-4" id="hobbyTableEditDiv">
+
+           <table class=" table table-bordered" id="hobbyEditTable"></table>
+          </div>
+
           <div class="col-md-4">
+          </div>
+
+        </div>
+
+        <div class="row" style="min-height: 5em;">
+          <div class="col-md-4">
+    
+          </div>
+
+
+          <div class="col-md-4" id="submitEditDiv">
 
             <input type="submit" name="SubmitEdit" value="Edit">
           </div>
+
           <div class="col-md-4">
           </div>
         </div>
+        
 
 
       </div>
@@ -378,20 +417,21 @@
 
 
         <div class="row" style="min-height: 5em;">
-
-          <div class="col-md-10">
+          <div class="col-md-12">
+          <div class="col-md-3">
             <h5>Total amount of users:</h5>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-9 left">
             <p id=amountOfUsers></p>
           </div>
-
+          </div>
         </div>
         <div class="row" style="min-height: 5em;">
-          <div class="col-md-9">
+          
+          <div class="col-md-12">
 
-            <div class="col-md-5">
-              <h5>Number of people with given hobby</h5>
+            <div class="col-md-4">
+              <h5 style="margin-top: 5px">Number of people with given hobby</h5>
             </div>
             <div class="col-md-3">
 
@@ -400,24 +440,24 @@
             <div class="col-md-2">
               <input type="button" id="searchHobby" value="search"></input>
             </div>
-            <div class="col-md-2">
-              <p id="amountOfPeopleWithGivenHobbyResult"></p>
+            <div class="col-md-3">
+              <p style="margin-top: 5px" id="amountOfPeopleWithGivenHobbyResult"></p>
             </div>
-
-
-
-          </div>
-
         </div>
+        </div>
+
         <div class="row" style="min-height: 5em;">
           <div class="col-md-12">
-            <div class="col-md-5">
-              <h5>Find User by phonenumber</h5>
+            <div class="col-md-4">
+              <h5 style="margin-top: 5px">Find User by phonenumber</h5>
             </div>
 
-            <div class="col-md-7">
-              <input type="number" id="phoneNumber" placeholder="PhoneNumber" />
+            <div class="col-md-3">
+              <input class="stretchToFit" type="number" id="phoneNumber" placeholder="PhoneNumber" />
+              </div>
+              <div class="col-md-5">
               <input type="button" id="personByPhoneSearch" value="search"></button>
+            
             </div>
             <table class="table table-bordered" id="personByPhoneNumber"></table>
           </div>

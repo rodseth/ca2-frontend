@@ -53,6 +53,9 @@ ul.header li a:hover:not(.active) {
 #center {
   text-align: center;
 }
+.left{
+  text-align: left;
+}
 
 .stretchToFit{
   width: 100%;

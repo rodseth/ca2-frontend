@@ -206,6 +206,8 @@ function makeHobbyArray(hobbiesArr){
   autocomplete(document.getElementById("hobbyInput"), hobbies);
   autocomplete(document.getElementById("hobbyInputEdit"), hobbies);
   autocomplete(document.getElementById("hobbyName"), hobbies);
+  autocomplete(document.getElementById("amountOfPeopleWithGivenHobby"), hobbies);
+  
 }
 function addHobbyToList(hobby){
   const list = hobby.map(function(hobby){
@@ -218,6 +220,72 @@ let chosenHobbies = [];
 function addHobbyToArray(hobby){
   chosenHobbies.push(hobby);
   addHobbyToList(chosenHobbies);
+}
+function hideFields(){
+  document.getElementById("nameEditDiv").style.visibility="hidden";
+  document.getElementById("emailEditDiv").style.visibility="hidden";
+  document.getElementById("cityEditDiv").style.visibility="hidden";
+  document.getElementById("addressEditDiv").style.visibility="hidden";
+  document.getElementById("phoneEditDiv").style.visibility="hidden";
+  document.getElementById("hobbyEditDiv").style.visibility="hidden";
+  document.getElementById("submitEditDiv").style.visibility="hidden";
+  
+  
+}
+let personByPhoneArr = [];
+
+function showFields(phone){
+  if(phone!==""){
+  document.getElementById("nameEditDiv").style.visibility="visible";
+  document.getElementById("emailEditDiv").style.visibility="visible";
+  document.getElementById("cityEditDiv").style.visibility="visible";
+  document.getElementById("addressEditDiv").style.visibility="visible";
+  document.getElementById("phoneEditDiv").style.visibility="visible";
+  document.getElementById("hobbyEditDiv").style.visibility="visible";
+  document.getElementById("submitEditDiv").style.visibility="visible";
+  }
+ 
+  fetch("http://localhost:8080/ca2/api/persons/phone/" + phone)
+    .then(res => res.json())
+    .then(data => {
+      personByPhoneArr = fillFieldsWithData(data);
+      document.getElementById("phoneEditTable").innerHTML = fetchPhonesForTable(data.phonesDTO);
+    })
+}
+let listOfPhonesForTable=[];
+function fetchPhonesForTable(phones){
+   listOfPhonesForTable = phones.map(function (phone){
+      return `<tr> <td>${phone.phoneNumber}</td> <td>${phone.typeOfNumber}</td> <td><button type="button" onClick="deletePhoneFromArray('${phone.phoneNumber}')">Remove</button></td></tr>`;
+  });
+ 
+  let headers = `<tr><th>Phone</th><th>Type</th><th>Remove phone</th></tr>`;
+  console.log(headers + listOfPhonesForTable)
+  return headers + listOfPhonesForTable;
+}
+//document.getElementById("deletePhoneBtns").onclick = () => deletePhoneFromArray("123");
+
+function deletePhoneFromArray(phoneNr){
+  const found  = listOfPhonesForTable.findIndex(element => element = phoneNr)
+  delete listOfPhonesForTable[found];
+  console.log("found" + found);
+  fetchPhonesForTable(listOfPhonesForTable);
+}
+
+function fillFieldsWithData(data){
+  console.log(data);
+  document.getElementById("personFirstNameEdit").value =  `${data.firstName}`;
+  document.getElementById("personLastNameEdit").value =  `${data.lastName}`;
+  document.getElementById("personEmailEdit").value =  `${data.email}`;
+  document.getElementById("cityInputEdit").value =  `${data.addressesDTO.cityInfoDto.cityName}, ${data.addressesDTO.cityInfoDto.zip}`;
+  document.getElementById("addressInputEdit").value =  `${data.addressesDTO.street}`;
+  document.getElementById("addressNumberInputEdit").value =  `${data.addressesDTO.additionalInfo}`;
+  //document.getElementById("phoneEditTable").value =  `${data.addressesDTO.additionalInfo}`; // Laves tabel
+  //document.getElementById("hobbyEditTable").value =  `${data.addressesDTO.additionalInfo}`; // Laves tabel
+
+
+}
+function addPhoneToTable(phone){
+
 }
 
 function menuItemClicked(evt) {
@@ -243,6 +311,8 @@ function menuItemClicked(evt) {
 
       getTotalAmountOfPeople();
 
+      populateHobbyarray();
+
       document.getElementById("searchHobby").onclick = () => getAmountOfPeopleWithGivenHobby();
 
       document.getElementById("search").onclick = () => getPersonByID();
@@ -253,6 +323,10 @@ function menuItemClicked(evt) {
 
     case "administrer": hideAllShowOne("administrer_html");
 
+      hideFields();
+
+      document.getElementById("findEditPerson").onclick = () => showFields(document.getElementById("editPersonPhone").value);
+
       document.getElementById("deletePerson").onclick = () => deletePerson(onclick)
       
       populateCityarray(); 
@@ -260,46 +334,55 @@ function menuItemClicked(evt) {
       populateHobbyarray();
 
       document.getElementById("addHobbyBtn").onclick = () => addHobbyToArray(document.getElementById("hobbyInput").value);
+      
+      document.getElementById("addPhoneForEditBtn").onclick = () => addPhoneToTable(document.getElementById("phoneNrInputEdit").value);
 
+      
 
-      document.getElementById("createPerson").onclick = () => submit(function() {
-        $.ajax({
-            type: 'POST',
-            url: 'http://localhost:8080/ca2/api/persons/create/',
-            data: ({ 
-              email: "hej",
-                firstName: "dw",
-                lastName: "wda",
-                addressesDTO: {
-                    street: "Street2",
-                    additionalInfo: "Additional"
-                     },
-                     
-                phonesDTO: [
-                        {
-                    phoneNumber: 4112111,
-                    typeOfNumber: "home"
-                    }
-                ],
-                hobbiesDTO: [
-                        {
-                    name: "Fodbold",
-                    wikiLink: "spark til bolden og fake skader",
-                    category: "boldspill",
-                    type: "teamsport"
+      document.getElementById("creeateUserBtn").onclick = (event) => {
+        event.preventDefault;
+        console.log("Linje 1")
+        let options = {
+          method: "POST",
+          headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+                      },
+        body: JSON.stringify({
+          email: "hej",
+                    firstName: "dw",
+                    lastName: "wda",
+                    addressesDTO: {
+                        street: "Street2",
+                        additionalInfo: "Additional"
+                         },
+                         
+                    phonesDTO: [
+                            {
+                        phoneNumber: 4112666,
+                        typeOfNumber: "home"
                         }
-                      ],
-                cityInfoDTO: {
-                  zip: "2830",
-                  cityName: "Virum"
-                }
-              
-                    }),
-                    contentType: "application/json",
-                    dataType: "json"
-        });
-        return false;
-    }); 
+                    ],
+                    hobbiesDTO: [
+                            {
+                        name: "Fodbold",
+                        wikiLink: "spark til bolden og fake skader",
+                        category: "boldspill",
+                        type: "teamsport"
+                            }
+                          ],
+                    cityInfoDTO: {
+                      zip: "2830",
+                      cityName: "Virum"
+                    }
+                  
+                        })
+        }
+        fetch("http://localhost:8080/ca2/api/persons/create/", options)
+        .then(response => response.json())
+        .then(json =>console.log("hej",json))
+        .catch(err=>console.log(err));
+    }; 
       
       break
 
@@ -420,45 +503,9 @@ document.addEventListener("click", function (e) {
     closeAllLists(e.target);
 });
 }
-/*
+
 document.getElementById("createPerson").onclick =  () => (function post(){
-  let options = {
-    method: "POST",
-    headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-                },
-  body: JSON.stringify({
-    email: "hej",
-              firstName: "dw",
-              lastName: "wda",
-              addressesDTO: {
-                  street: "Street2",
-                  additionalInfo: "Additional"
-                   },
-                   
-              phonesDTO: [
-                      {
-                  phoneNumber: 4112666,
-                  typeOfNumber: "home"
-                  }
-              ],
-              hobbiesDTO: [
-                      {
-                  name: "Fodbold",
-                  wikiLink: "spark til bolden og fake skader",
-                  category: "boldspill",
-                  type: "teamsport"
-                      }
-                    ],
-              cityInfoDTO: {
-                zip: "2830",
-                cityName: "Virum"
-              }
-            
-                  })
-  }
-  fetch("http://localhost:8080/ca2/api/persons/create/", options).then(response => response.json()).then(json =>console.log(json)).catch(err=>console.log(err));
+ 
 }
-)*/
+)
 
