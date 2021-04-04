@@ -207,20 +207,54 @@ function makeHobbyArray(hobbiesArr){
   autocomplete(document.getElementById("hobbyInputEdit"), hobbies);
   autocomplete(document.getElementById("hobbyName"), hobbies);
   autocomplete(document.getElementById("amountOfPeopleWithGivenHobby"), hobbies);
+  autocomplete(document.getElementById("hobbyInputEdit"), hobbies);
   
 }
-function addHobbyToList(hobby){
-  const list = hobby.map(function(hobby){
-    return `<li>${hobby}</li>`;
-  })
 
-  document.getElementById("hobbyList").innerHTML = list;
+let chosenHobbiesList = [];
+let sendHobbies = [];
+
+function makeFinalAddHobbyArray(){
+  let arr = sendHobbies.join(",");
+  console.log(arr);
+  fetch("http://localhost:8080/ca2/api/hobbies/"+arr)
+  .then(res => res.json())
+  .then(data => {
+    console.log("Retrieved following hobbies: " + data);
+    makeFinalArray(data);
+  })
+  
+  
+  
 }
-let chosenHobbies = [];
-function addHobbyToArray(hobby){
-  chosenHobbies.push(hobby);
-  addHobbyToList(chosenHobbies);
+let finalHobbyList;
+function makeFinalArray(data){
+  let string = data.map(function(data){
+   return ` {
+      "name": ${data.name},
+      "wikiLink":  ${data.wikilink},
+      "category":  ${data.category},
+      "type":  ${data.type}
+          }`
+  });
+  console.log("String is: " + string)
+  finalHobbyList = string;
+  return finalHobbyList;
 }
+function addHobbyToList(hobby){
+  sendHobbies.push(hobby);
+  let newList = [];
+  let headers = `<tr> <th>Hobby</th> </tr`;
+  if(chosenHobbiesList.length == 0){
+  chosenHobbiesList.unshift(headers);
+}
+  chosenHobbiesList.push(` <tr> <td>${hobby}<td> </tr> `);
+  console.log(chosenHobbiesList);
+  newList = chosenHobbiesList;
+  document.getElementById("addHobbyTable").innerHTML = newList.join("");
+}
+
+
 function hideFields(){
   document.getElementById("nameEditDiv").style.visibility="hidden";
   document.getElementById("emailEditDiv").style.visibility="hidden";
@@ -229,6 +263,8 @@ function hideFields(){
   document.getElementById("phoneEditDiv").style.visibility="hidden";
   document.getElementById("hobbyEditDiv").style.visibility="hidden";
   document.getElementById("submitEditDiv").style.visibility="hidden";
+  document.getElementById("phoneEditTableDiv").style.visibility="hidden";
+  
   
   
 }
@@ -243,6 +279,7 @@ function showFields(phone){
   document.getElementById("phoneEditDiv").style.visibility="visible";
   document.getElementById("hobbyEditDiv").style.visibility="visible";
   document.getElementById("submitEditDiv").style.visibility="visible";
+  document.getElementById("phoneEditTableDiv").style.visibility="visible";
   }
  
   fetch("http://localhost:8080/ca2/api/persons/phone/" + phone)
@@ -250,25 +287,89 @@ function showFields(phone){
     .then(data => {
       personByPhoneArr = fillFieldsWithData(data);
       document.getElementById("phoneEditTable").innerHTML = fetchPhonesForTable(data.phonesDTO);
-    })
+      document.getElementById("hobbyEditTable").innerHTML = fetchHobbiesForTable(data.hobbiesDTO);
+    });
 }
+let listOfHobbiesForTable=[];
+function fetchHobbiesForTable(hobby){
+   listOfHobbiesForTable = hobby.map(function (hobby){
+      return `<tr> <td>${hobby.name}</td></tr>`;
+  });
+  let headers = `<tr><th>Hobby</th></tr>`;
+  listOfHobbiesForTable.unshift(headers);
+  let joinedList = listOfHobbiesForTable.join("");
+  
+  return joinedList ;
+}
+
 let listOfPhonesForTable=[];
 function fetchPhonesForTable(phones){
    listOfPhonesForTable = phones.map(function (phone){
-      return `<tr> <td>${phone.phoneNumber}</td> <td>${phone.typeOfNumber}</td> <td><button type="button" onClick="deletePhoneFromArray('${phone.phoneNumber}')">Remove</button></td></tr>`;
+      return `<tr> <td>${phone.phoneNumber}</td> <td>${phone.typeOfNumber}</td> </tr>`;
   });
+
  
-  let headers = `<tr><th>Phone</th><th>Type</th><th>Remove phone</th></tr>`;
-  console.log(headers + listOfPhonesForTable)
-  return headers + listOfPhonesForTable;
+  let headers = `<tr><th>Phone</th><th>Type</th></tr>`;
+  listOfPhonesForTable.unshift(headers);
+  let joinedList = listOfPhonesForTable.join("");
+  
+  return joinedList ;
 }
-//document.getElementById("deletePhoneBtns").onclick = () => deletePhoneFromArray("123");
+
+function deleteHobbyFromArray(hobby){
+  let arr = [];
+  let i =0;
+ 
+  for(i; i<listOfHobbiesForTable.length; i++){
+    console.log(hobby);
+    if(listOfHobbiesForTable[i].includes(hobby)){
+       
+    }else{
+     arr.push(listOfHobbiesForTable[i]);
+    
+   
+  }
+  listOfHobbiesForTable.splice(0,listOfHobbiesForTable.length);
+  console.log("after Splice: " + listOfHobbiesForTable);
+  listOfHobbiesForTable = arr;
+  let newList = listOfHobbiesForTable.join("");
+  console.log(newList);
+  document.getElementById("hobbyEditTable").innerHTML = newList;
+}
+}
+function addHobbyToTable(hobby){
+
+  listOfHobbiesForTable.push(`<tr> <td>${hobby}</td> </tr>`);
+  console.log("list: " + listOfHobbiesForTable);
+  let newList = listOfHobbiesForTable.join("");
+  document.getElementById("hobbyEditTable").innerHTML = newList;
+}
+
 
 function deletePhoneFromArray(phoneNr){
-  const found  = listOfPhonesForTable.findIndex(element => element = phoneNr)
-  delete listOfPhonesForTable[found];
-  console.log("found" + found);
-  fetchPhonesForTable(listOfPhonesForTable);
+  let arr = [];
+  let i =0;
+  if(phoneNr.length<8){
+    alert("Phonenumber must be 8 characters or more");
+  } else{
+
+  for(i; i<listOfPhonesForTable.length; i++){
+    console.log(phoneNr);
+    if(listOfPhonesForTable[i].includes(phoneNr)){
+       
+    }else{
+     arr.push(listOfPhonesForTable[i]);
+    }
+   
+  }
+  let headers = `<tr><th>Phone</th><th>Type</th></tr>`;
+  listOfPhonesForTable.splice(0,listOfPhonesForTable.length);
+  console.log("after Splice: " + listOfPhonesForTable);
+  listOfPhonesForTable = arr;
+  let newList = listOfPhonesForTable.join("");
+  console.log(newList);
+  document.getElementById("phoneEditTable").innerHTML = newList;
+}
 }
 
 function fillFieldsWithData(data){
@@ -284,8 +385,23 @@ function fillFieldsWithData(data){
 
 
 }
-function addPhoneToTable(phone){
-
+function addPhoneToTable(phoneNumber, typeOfNumber1, typeofNr2){
+  if(phoneNumber.length<8){
+    alert("Phonenumber must be 8 characters or more");
+  } else{
+  let typeOfNumber;
+  if(typeOfNumber1!==undefined){
+    typeOfNumber = typeOfNumber1;
+  } else if(typeofNr2!==undefined){
+    typeOfNumber = typeofNr2;
+  }else{
+    alert("Please select type of phone")
+  }
+  listOfPhonesForTable.push(`<tr> <td>${phoneNumber}</td> <td>${typeOfNumber}</td> </tr>`);
+  console.log("list: " + listOfPhonesForTable);
+  let newList = listOfPhonesForTable.join("");
+  document.getElementById("phoneEditTable").innerHTML = newList;
+}
 }
 
 function menuItemClicked(evt) {
@@ -312,6 +428,7 @@ function menuItemClicked(evt) {
       getTotalAmountOfPeople();
 
       populateHobbyarray();
+      
 
       document.getElementById("searchHobby").onclick = () => getAmountOfPeopleWithGivenHobby();
 
@@ -325,7 +442,7 @@ function menuItemClicked(evt) {
 
       hideFields();
 
-      document.getElementById("findEditPerson").onclick = () => showFields(document.getElementById("editPersonPhone").value);
+      document.getElementById("findEditPerson").onclick = () => showFields(document.getElementById("editPersonPhone").value)
 
       document.getElementById("deletePerson").onclick = () => deletePerson(onclick)
       
@@ -333,51 +450,67 @@ function menuItemClicked(evt) {
 
       populateHobbyarray();
 
-      document.getElementById("addHobbyBtn").onclick = () => addHobbyToArray(document.getElementById("hobbyInput").value);
+      document.getElementById("addHobbyBtn").onclick = () => addHobbyToList(document.getElementById("hobbyInput").value);
       
       document.getElementById("addPhoneForEditBtn").onclick = () => addPhoneToTable(document.getElementById("phoneNrInputEdit").value);
 
+      document.getElementById("removePhoneForEditBtn").onclick = () => deletePhoneFromArray(document.getElementById("phoneNrInputEdit").value);
       
+      document.getElementById("addPhoneForEditBtn").onclick = () => addPhoneToTable(document.getElementById("phoneNrInputEdit").value, document.getElementById("homeRadio").value,  document.getElementById("mobileRadio").value);
+      document.getElementById("addHobbyBtnEdit").onclick = () => addHobbyToTable(document.getElementById("hobbyInputEdit").value);
+      document.getElementById("removeHobbyBtnEdit").onclick = () => deleteHobbyFromArray(document.getElementById("hobbyInputEdit").value);
+
+
 
       document.getElementById("creeateUserBtn").onclick = (event) => {
         event.preventDefault;
-        console.log("Linje 1")
-        let options = {
+        
+        let someString = document.getElementById("cityInput").value;
+        let index = someString.indexOf(" ");  // Gets the first index where a space occours
+        let city = someString.substr(0, index); // Gets the first part
+        let zip = someString.substr(index + 1);
+        let mobileType;
+        //makeFinalAddHobbyArray();
+       // console.log("Hobby Log: "  + finalHobbyList);
+        if(document.getElementById("homeRadioEdit").value=="home"){
+          mobileType= "home"
+        } else {
+          mobileType = "mobile"
+        }
+        let options;
+        makeFinalAddHobbyArray().then(function(){
+        options = {
           method: "POST",
           headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
                       },
-        body: JSON.stringify({
-          email: "hej",
-                    firstName: "dw",
-                    lastName: "wda",
+        body: JSON.stringify({ 
+          email: document.getElementById("personEmail").value,
+                    firstName:  document.getElementById("personFirstName").value,
+                    lastName: document.getElementById("personLastName").value,
                     addressesDTO: {
-                        street: "Street2",
-                        additionalInfo: "Additional"
+                        street: document.getElementById("addressInput").value,
+                        additionalInfo: document.getElementById("addressNumberInput").value
                          },
                          
                     phonesDTO: [
                             {
-                        phoneNumber: 4112666,
-                        typeOfNumber: "home"
+                        phoneNumber: document.getElementById("phoneNrInput").value,
+                        typeOfNumber: mobileType
                         }
                     ],
                     hobbiesDTO: [
-                            {
-                        name: "Fodbold",
-                        wikiLink: "spark til bolden og fake skader",
-                        category: "boldspill",
-                        type: "teamsport"
-                            }
-                          ],
+                     finalHobbyList
+                          ],  
                     cityInfoDTO: {
-                      zip: "2830",
-                      cityName: "Virum"
+                      zip: zip,
+                      cityName: city
                     }
                   
                         })
-        }
+        }})
+        console.log(options);
         fetch("http://localhost:8080/ca2/api/persons/create/", options)
         .then(response => response.json())
         .then(json =>console.log("hej",json))

@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hobbies, persons and places</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
 </head>
 
 <body>
@@ -264,22 +263,19 @@
               <br>
               <input type="number" id="phoneNrInputEdit" class="stretchToFit">
             </div>
-            <div class="col-md-2" style="padding-right: 0">
+            <div class="col-md-3" style="padding-right: 0">
               <label for="homeRadioEdit">Home</label>
               <br>
               
               <input type="radio" id="homeRadioEdit" name="phoneRadioEdit" value="home" class="stretchToFit" style=" margin-top: 5px;">
             </div>
-            <div class="col-md-2" style="padding-right: 0">
+            <div class="col-md-3" style="padding-right: 0">
               <label for="mobileRadioEdit">Mobile</label>
               <br>
               
               <input type="radio" id="mobileRadioEdit" name="phoneRadioEdit" value="mobile" class="stretchToFit" style=" margin-top: 5px;">
             </div>
-            <div class="col-md-2">
-              <br>
-              <input type="button" id="addPhoneForEditBtn" value="Add" style="margin-top: 5px;">
-            </div>
+           
 
           </div>
           <div class="col-md-4">
@@ -287,21 +283,20 @@
         </div>
         <div class="row" style="min-height: 5em;">
           <div class="col-md-4">
-
-            <div class="col-md-4">
-              <label for="hobbyList">Chosen hobbies:</label>
-            </div>
-            <div class="col-md-4">
-              <ul id="hobbyList">
-
-              </ul>
-              <form id="createPerson">
-                <input type="hidden">
-              </form>
-            </div>
+            
+              <table class="table table-bordered" id="addHobbyTable">
+              </table>
+              
+            
           </div>
 
           <div class="col-md-4" id="phoneEditTableDiv">
+            <div class="col-md-6">
+              <input type="button" id="addPhoneForEditBtn" value="Add" style="margin-top: 5px;">
+            </div> <div class="col-md-6">
+              <input type="button" id="removePhoneForEditBtn" value="Remove" style="margin-top: 5px;">
+            </div>
+            <br>
             <table class=" table table-bordered" id="phoneEditTable"></table>
           </div>
 
@@ -328,10 +323,7 @@
                 <input id="hobbyInputEdit" type="text" name="myHobbyEdit" placeholder="Hobby" class="stretchToFit">
               </div>
             </div>
-            <div class="col-md-4" style="padding-right: 0">
-              <br>
-              <input id="addHobbyBtnEdit" type="button" value="add" class="stretchToFit" style="margin-top: 5px">
-            </div>
+            
           </div>
           <div class="col-md-4">
           </div>
@@ -343,7 +335,14 @@
 
 
           <div class="col-md-4" id="hobbyTableEditDiv">
-
+            <div class="col-md-6" style="padding-right: 0">
+              <br>
+              <input id="addHobbyBtnEdit" type="button" value="Add" class="stretchToFit" style="margin-top: 5px">
+            </div>
+            <div class="col-md-6" style="padding-right: 0">
+              <br>
+              <input id="removeHobbyBtnEdit" type="button" value="Remove" class="stretchToFit" style="margin-top: 5px">
+            </div>
            <table class=" table table-bordered" id="hobbyEditTable"></table>
           </div>
 
