@@ -214,33 +214,7 @@ function makeHobbyArray(hobbiesArr){
 let chosenHobbiesList = [];
 let sendHobbies = [];
 
-function makeFinalAddHobbyArray(){
-  let arr = sendHobbies.join(",");
-  console.log(arr);
-  fetch("http://localhost:8080/ca2/api/hobbies/"+arr)
-  .then(res => res.json())
-  .then(data => {
-    console.log("Retrieved following hobbies: " + data);
-    makeFinalArray(data);
-  })
-  
-  
-  
-}
-let finalHobbyList;
-function makeFinalArray(data){
-  let string = data.map(function(data){
-   return ` {
-      "name": ${data.name},
-      "wikiLink":  ${data.wikilink},
-      "category":  ${data.category},
-      "type":  ${data.type}
-          }`
-  });
-  console.log("String is: " + string)
-  finalHobbyList = string;
-  return finalHobbyList;
-}
+
 function addHobbyToList(hobby){
   sendHobbies.push(hobby);
   let newList = [];
@@ -460,7 +434,12 @@ function menuItemClicked(evt) {
       document.getElementById("addHobbyBtnEdit").onclick = () => addHobbyToTable(document.getElementById("hobbyInputEdit").value);
       document.getElementById("removeHobbyBtnEdit").onclick = () => deleteHobbyFromArray(document.getElementById("hobbyInputEdit").value);
 
-
+ let finalHobbyList;
+        function makeFinalArray(data){ 
+          let string = data
+          finalHobbyList = string;
+          return finalHobbyList;
+        }
 
       document.getElementById("creeateUserBtn").onclick = (event) => {
         event.preventDefault;
@@ -470,51 +449,68 @@ function menuItemClicked(evt) {
         let city = someString.substr(0, index); // Gets the first part
         let zip = someString.substr(index + 1);
         let mobileType;
-        //makeFinalAddHobbyArray();
-       // console.log("Hobby Log: "  + finalHobbyList);
-        if(document.getElementById("homeRadioEdit").value=="home"){
+         if(document.getElementById("homeRadioEdit").value=="home"){
           mobileType= "home"
         } else {
           mobileType = "mobile"
         }
+
         let options;
-        makeFinalAddHobbyArray().then(function(){
-        options = {
-          method: "POST",
-          headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-                      },
-        body: JSON.stringify({ 
-          email: document.getElementById("personEmail").value,
-                    firstName:  document.getElementById("personFirstName").value,
-                    lastName: document.getElementById("personLastName").value,
-                    addressesDTO: {
-                        street: document.getElementById("addressInput").value,
-                        additionalInfo: document.getElementById("addressNumberInput").value
-                         },
-                         
-                    phonesDTO: [
-                            {
-                        phoneNumber: document.getElementById("phoneNrInput").value,
-                        typeOfNumber: mobileType
+        makeFinalAddHobbyArray();
+        function makeFinalAddHobbyArray(){
+          let arr = sendHobbies.join(",");
+          console.log(arr);
+          fetch("http://localhost:8080/ca2/api/hobbies/"+arr)
+          .then(res => res.json())
+          .then(data => {
+            console.log("Retrieved following hobbies: " + data);
+            makeFinalArray(data);
+            options = {
+              method: "POST",
+              headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+                          },
+            body: JSON.stringify({ 
+              email: document.getElementById("personEmail").value,
+                        firstName:  document.getElementById("personFirstName").value,
+                        lastName: document.getElementById("personLastName").value,
+                        addressesDTO: {
+                            street: document.getElementById("addressInput").value,
+                            additionalInfo: document.getElementById("addressNumberInput").value
+                             },
+                             
+                        phonesDTO: [
+                                {
+                            phoneNumber: document.getElementById("phoneNrInput").value,
+                            typeOfNumber: mobileType
+                            }
+                        ],
+                        hobbiesDTO: 
+                         finalHobbyList,  
+                        cityInfoDTO: {
+                          zip: zip,
+                          cityName: city
                         }
-                    ],
-                    hobbiesDTO: [
-                     finalHobbyList
-                          ],  
-                    cityInfoDTO: {
-                      zip: zip,
-                      cityName: city
-                    }
-                  
-                        })
-        }})
-        console.log(options);
-        fetch("http://localhost:8080/ca2/api/persons/create/", options)
-        .then(response => response.json())
-        .then(json =>console.log("hej",json))
-        .catch(err=>console.log(err));
+                      
+                            }).replace()
+            }
+            console.log(options);
+              fetch("http://localhost:8080/ca2/api/persons/create/", options)
+              .then(response => response.json())
+              .then(json =>console.log("hej",json))
+              .catch(err=>console.log(err));
+
+          })
+          
+          
+          
+        }
+       
+       
+       
+         
+       
     }; 
       
       break
