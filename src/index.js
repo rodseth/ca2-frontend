@@ -6,7 +6,7 @@ import hobbyFacade from "./hobbyFacade"
 import tableFiller from './tableFiller'
 let persons = [];
 
-
+let sendPhones=[];
 document.getElementById("all-content").style.display = "block"
 
 
@@ -268,47 +268,23 @@ function showFields(phone) {
       document.getElementById("hobbyEditTable").innerHTML = fetchHobbiesForTable(data.hobbiesDTO);
     });
 }
+
+let sendHobbiesForEdit = [];
 let listOfHobbiesForTable = [];
 function fetchHobbiesForTable(hobby) {
   listOfHobbiesForTable = hobby.map(function (hobby) {
     return `<tr> <td>${hobby.name}</td></tr>`;
   });
+ 
   let headers = `<tr><th>Hobby</th></tr>`;
   listOfHobbiesForTable.unshift(headers);
   let joinedList = listOfHobbiesForTable.join("");
-
+  
+  sendHobbiesForEdit = hobby.map(function(hobby){
+    return `${hobby.name}`
+  });
+  console.log("Fetched hobbies: " + sendHobbiesForEdit);
   return joinedList;
-}
-
-
-
-function deleteHobbyFromArray(hobby) {
-  let arr = [];
-  let i = 0;
-
-  for (i; i < listOfHobbiesForTable.length; i++) {
-    console.log(hobby);
-    if (listOfHobbiesForTable[i].includes(hobby)) {
-
-    } else {
-      arr.push(listOfHobbiesForTable[i]);
-
-
-    }
-    listOfHobbiesForTable.splice(0, listOfHobbiesForTable.length);
-    console.log("after Splice: " + listOfHobbiesForTable);
-    listOfHobbiesForTable = arr;
-    let newList = listOfHobbiesForTable.join("");
-    console.log(newList);
-    document.getElementById("hobbyEditTable").innerHTML = newList;
-  }
-}
-function addHobbyToTable(hobby) {
-
-  listOfHobbiesForTable.push(`<tr> <td>${hobby}</td> </tr>`);
-  console.log("list: " + listOfHobbiesForTable);
-  let newList = listOfHobbiesForTable.join("");
-  document.getElementById("hobbyEditTable").innerHTML = newList;
 }
 
 
@@ -319,7 +295,7 @@ function fillFieldsWithData(data) {
   document.getElementById("personFirstNameEdit").value = `${data.firstName}`;
   document.getElementById("personLastNameEdit").value = `${data.lastName}`;
   document.getElementById("personEmailEdit").value = `${data.email}`;
-  document.getElementById("cityInputEdit").value = `${data.addressesDTO.cityInfoDto.cityName}, ${data.addressesDTO.cityInfoDto.zip}`;
+  document.getElementById("cityInputEdit").value = `${data.addressesDTO.cityInfoDto.cityName} ${data.addressesDTO.cityInfoDto.zip}`;
   document.getElementById("addressInputEdit").value = `${data.addressesDTO.street}`;
   document.getElementById("addressNumberInputEdit").value = `${data.addressesDTO.additionalInfo}`;
   //document.getElementById("phoneEditTable").value =  `${data.addressesDTO.additionalInfo}`; // Laves tabel
@@ -383,7 +359,7 @@ function menuItemClicked(evt) {
 
       document.getElementById("addPhoneForEditBtn").onclick = () => addPhoneToTable(document.getElementById("phoneNrInputEdit").value, document.getElementById("homeRadio").value, document.getElementById("mobileRadio").value);
       document.getElementById("addHobbyBtnEdit").onclick = () => addHobbyToTable(document.getElementById("hobbyInputEdit").value);
-      document.getElementById("removeHobbyBtnEdit").onclick = () => deleteHobbyFromArray(document.getElementById("hobbyInputEdit").value);
+      document.getElementById("removeHobbyBtnEdit").onclick = () => deleteHobbyFromArrayEdit(document.getElementById("hobbyInputEdit").value);
 
       //For CreateUser
       let finalHobbyList;
@@ -465,14 +441,56 @@ function menuItemClicked(evt) {
 
 
 
+      //FOR EDIT USER
+     // let chosenHobbiesListForEdit = [];
+     
+      
+     
+      function addHobbyToTable(hobby) {
+        sendHobbiesForEdit.push(hobby);
+        let newList = [];
+        let headers = `<tr> <th>Hobby</th> </tr`;
+        if (listOfHobbiesForTable.length == 0) {
+          listOfHobbiesForTable.unshift(headers);
+        }
+        listOfHobbiesForTable.push(` <tr> <td>${hobby}<td> </tr> `);
+        console.log("Chosen hobbies list : " + listOfHobbiesForTable);
+        newList = listOfHobbiesForTable;
+        document.getElementById("hobbyEditTable").innerHTML = newList.join("");
+      }   
+//For EDIT
+
+function deleteHobbyFromArrayEdit(hobby) {
+  let arr = [];
+  let i = 0;
+
+  for (i; i < listOfHobbiesForTable.length; i++) {
+    console.log(hobby);
+    if (listOfHobbiesForTable[i].includes(hobby)) {
+
+    } else {
+      arr.push(listOfHobbiesForTable[i]);
+
+
+    } 
+  } 
+  listOfHobbiesForTable.splice(0, listOfHobbiesForTable.length);
+    console.log("after Splice: " + listOfHobbiesForTable);
+    listOfHobbiesForTable = arr;
+    let newList = listOfHobbiesForTable.join("");
+    console.log(newList);
+    document.getElementById("hobbyEditTable").innerHTML = newList;
+}
+
  //For EditUser
  let finalEditHobbyList;
  function makeFinalEditArray(data) {
    let string = data
-   finalHobbyList = string;
-   return finalHobbyList;
+   finalEditHobbyList = string;
+   return finalEditHobbyList;
  }
-
+ let phoneJsonArr = [];
+let stringJson ="";
  //EDIT USER FUNCTION
  document.getElementById("SubmitEdit").onclick = (event) => {
    event.preventDefault;
@@ -481,6 +499,40 @@ function menuItemClicked(evt) {
    let index = someString.indexOf(" ");  // Gets the first index where a space occours
    let city = someString.substr(0, index); // Gets the first part
    let zip = someString.substr(index + 1);
+   let obj;
+   makePhonesIntoJson();
+   function makePhonesIntoJson(){
+     console.log("PHONES: " + sendPhones)
+     phoneJsonArr.unshift("{");
+    let k = 0;
+    
+    for(k; k<sendPhones.length; k++){
+      if(k!=sendPhones.length-1){
+        
+   let index2 = sendPhones[k].indexOf(",");  // Gets the first index where a space occours
+   let phonenrFINAL = sendPhones[k].substr(0, index2); // Gets the first part
+   let phoneTypeFINAL = sendPhones[k].substr(index2 + 1);
+      stringJson += `{"phoneNumber": ${phonenrFINAL},
+      "typeOfNumber": "${phoneTypeFINAL}"},`
+  } else{
+    let index2 = sendPhones[k].indexOf(",");  // Gets the first index where a space occours
+   let phonenrFINAL = sendPhones[k].substr(0, index2); // Gets the first part
+   let phoneTypeFINAL = sendPhones[k].substr(index2 + 1);
+      stringJson += `{"phoneNumber": ${phonenrFINAL},
+      "typeOfNumber": "${phoneTypeFINAL}"}`
+      
+  } 
+ 
+   console.log("PHONE2 : "+ stringJson);
+    
+  } 
+  let finalString = `[${stringJson}]`
+  
+  obj = JSON.parse(finalString);
+  
+    
+ 
+  }
    //MAKE ARRAY FOR PHONES + TYPE
    let mobileType;
    if (document.getElementById("homeRadioEdit").value == "home") {
@@ -489,19 +541,19 @@ function menuItemClicked(evt) {
      mobileType = "mobile"
    }
    getPhonesForEdit();
-
    let options;
-   makeFinalAddHobbyArray();
-   function makeFinalAddHobbyArray() {
-     let arr = sendHobbies.join(",");
-     console.log(arr);
+   makeFinalAddHobbyArrayForEdit();
+   console.log("HobbiesList: " + finalEditHobbyList);
+   function makeFinalAddHobbyArrayForEdit() {
+     let arr = sendHobbiesForEdit.join(",");
+     console.log("sent String: " + arr);
      fetch("http://localhost:8080/ca2/api/hobbies/" + arr)
        .then(res => res.json())
        .then(data => {
-         console.log("Retrieved following hobbies: " + data);
-         makeFinalArray(data);
+         console.log("Retrieved following hobbies2: " + data);
+         makeFinalEditArray(data);
          options = {
-           method: "POST",
+           method: "PUT",
            headers: {
              'Accept': 'application/json',
              'Content-Type': 'application/json'
@@ -511,15 +563,16 @@ function menuItemClicked(evt) {
              firstName: document.getElementById("personFirstNameEdit").value,
              lastName: document.getElementById("personFirstNameEdit").value,
              addressesDTO: {
-               street: document.getElementById("addressInput").value,
-               additionalInfo: document.getElementById("addressNumberInput").value
+               street: document.getElementById("addressInputEdit").value,
+               additionalInfo: document.getElementById("addressNumberInputEdit").value
              },
 
-             phonesDTO: [
-               listOfPhonesForEdit
-             ],
+             phonesDTO: 
+              obj
+             ,
              hobbiesDTO:
              finalEditHobbyList,
+
              cityInfoDTO: {
                zip: zip,
                cityName: city
@@ -551,7 +604,7 @@ function menuItemClicked(evt) {
 
 
       //FOR EDIT PERSON
-      let sendPhones=[];
+      
       function addPhoneToTable(phoneNumber) {
         let mobileType;
         if (document.getElementById("homeRadioEdit").value == "home") {
@@ -559,14 +612,10 @@ function menuItemClicked(evt) {
         } else {
           mobileType = "mobile"
         }
-
-
-       
-
         if (phoneNumber.length < 8) {
           alert("Phonenumber must be 8 characters or more");
         } else {
-          sendPhones.push(phoneNumber +","+ mobileType);
+          sendPhones.push(`${phoneNumber},${mobileType}`);
           console.log("After adding to array: " + sendPhones);
           listOfPhonesForTable.push(`<tr> <td>${phoneNumber}</td> <td>${mobileType}</td> </tr>`);
           console.log("list: " + listOfPhonesForTable);
@@ -623,7 +672,7 @@ function menuItemClicked(evt) {
         });
       
         sendPhones = phones.map(function(phone){
-          return `${phone.phoneNumber}, ${phone.typeOfNumber}`
+          return `${phone.phoneNumber},${phone.typeOfNumber}`
         })
         let headers = `<tr><th>Phone</th><th>Type</th></tr>`;
         listOfPhonesForTable.unshift(headers);
