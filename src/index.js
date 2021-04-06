@@ -533,6 +533,7 @@ let stringJson ="";
     
  
   }
+  sendPhones.splice(0,sendPhones.length);
    //MAKE ARRAY FOR PHONES + TYPE
    let mobileType;
    if (document.getElementById("homeRadioEdit").value == "home") {
