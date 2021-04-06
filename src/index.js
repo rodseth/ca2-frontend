@@ -5,7 +5,8 @@ import zipFacade from "./zipFacade"
 import hobbyFacade from "./hobbyFacade"
 import tableFiller from './tableFiller'
 let persons = [];
-
+//let URL = "https://www.ipwithme.com/";
+let URL = "http://localhost:8080/";
 let sendPhones=[];
 document.getElementById("all-content").style.display = "block"
 
@@ -62,7 +63,7 @@ function makeTableRowsForZips(name) {
 }
 
 function getPeople() {
-  fetch("http://localhost:8080/ca2/api/persons")
+  fetch(URL+"ca2/api/persons")
     .then(res => res.json())
     .then(data => {
       document.getElementById("allPersons").innerHTML = makeTableRow(data);
@@ -72,7 +73,7 @@ function displayAmount(count) {
   return count.count;
 }
 function getTotalAmountOfPeople() {
-  fetch("http://localhost:8080/ca2/api/persons/count")
+  fetch(URL + "ca2/api/persons/count")
     .then(res => res.json())
     .then(data => {
       document.getElementById("amountOfUsers").innerText = displayAmount(data);
@@ -81,7 +82,7 @@ function getTotalAmountOfPeople() {
 
 function getAmountOfPeopleWithGivenHobby() {
   let hobby = document.getElementById("amountOfPeopleWithGivenHobby").value;
-  fetch("http://localhost:8080/ca2/api/persons/count/" + hobby)
+  fetch(URL + "ca2/api/persons/count/" + hobby)
     .then(res => res.json())
     .then(data => {
       document.getElementById("amountOfPeopleWithGivenHobbyResult").innerText = displayAmount(data);
@@ -89,7 +90,7 @@ function getAmountOfPeopleWithGivenHobby() {
 }
 function getPersonByID() {
   let id = document.getElementById("personID").value;
-  fetch("http://localhost:8080/ca2/api/persons/id/" + id)
+  fetch(URL + "ca2/api/persons/id/" + id)
     .then(res => res.json())
     .then(data => {
       document.getElementById("personByID").innerHTML = makeSingleTableRow(data);
@@ -99,7 +100,7 @@ function getPersonByID() {
 //TODo søg for denne virker med endpoint
 function getPersonByPhoneNum() {
   let phoneNumber = document.getElementById("phoneNumber").value;
-  fetch("http://localhost:8080/ca2/api/persons/phone/" + phoneNumber)
+  fetch(URL + "ca2/api/persons/phone/" + phoneNumber)
     .then(res => res.json())
     .then(data => {
       document.getElementById("personByPhoneNumber").innerHTML = makeSingleTableRowForPerson(data);
@@ -112,10 +113,10 @@ function getPersonByPhoneNum() {
 function deletePerson(event) {
   let id = document.getElementById("deletePersonID").value;
   var xhttp = new XMLHttpRequest();
-  xhttp.open("DELETE", "http://localhost:8080/ca2/api/persons/delete/" + id, true);
+  xhttp.open("DELETE", URL + "ca2/api/persons/delete/" + id, true);
   xhttp.send();
   //let id = document.getElementById("personID").value;
-  fetch("http://localhost:8080/ca2/api/persons/id/" + id)
+  fetch(URL + "ca2/api/persons/id/" + id)
     .then(res => res.json())
     .then(data => {
 
@@ -133,7 +134,7 @@ function deletePerson(event) {
 
 function getPeopleWithHobby() {
   let hobby = document.getElementById("hobbyName").value;
-  fetch("http://localhost:8080/ca2/api/persons/hobby/" + hobby)
+  fetch(URL + "ca2/api/persons/hobby/" + hobby)
     .then(res => res.json())
     .then(data => {
       document.getElementById("persons-with-hobby").innerHTML = makeTableRow(data);
@@ -142,7 +143,7 @@ function getPeopleWithHobby() {
 
 function getPersonsByZip() {
   let cityName = document.getElementById("cityName").value;
-  fetch("http://localhost:8080/ca2/api/persons/city/" + cityName)
+  fetch(URL + "ca2/api/persons/city/" + cityName)
     .then(res => res.json())
     .then(data => {
       document.getElementById("personsByZip").innerHTML = makeTableRow(data);
@@ -150,7 +151,7 @@ function getPersonsByZip() {
 }
 
 function getAllZips() {
-  fetch("http://localhost:8080/ca2/api/zipcodes/")
+  fetch(URL + "ca2/api/zipcodes/")
     .then(res => res.json())
     .then(data => {
       document.getElementById("zipCodes").innerHTML = makeTableRowsForZips(data);
@@ -161,7 +162,7 @@ let cities = [];
 
 function populateCityarray() {
 
-  fetch("http://localhost:8080/ca2/api/zipcodes/")
+  fetch(URL + "ca2/api/zipcodes/")
     .then(res => res.json())
     .then(data => {
       cities = makeArray(data);
@@ -170,7 +171,7 @@ function populateCityarray() {
 }
 function populateCityarrayForZipsearch() {
 
-  fetch("http://localhost:8080/ca2/api/zipcodes/")
+  fetch(URL + "ca2/api/zipcodes/")
     .then(res => res.json())
     .then(data => {
       cities = makeArrayForFindingZip(data);
@@ -195,7 +196,7 @@ let hobbies = [];
 
 function populateHobbyarray() {
 
-  fetch("http://localhost:8080/ca2/api/hobbies/")
+  fetch(URL + "ca2/api/hobbies/")
     .then(res => res.json())
     .then(data => {
       hobbies = makeHobbyArray(data);
@@ -260,7 +261,7 @@ function showFields(phone) {
     document.getElementById("hobbyTableEditDiv").style.visibility = "visible";
   }
 
-  fetch("http://localhost:8080/ca2/api/persons/phone/" + phone)
+  fetch(URL + "ca2/api/persons/phone/" + phone)
     .then(res => res.json())
     .then(data => {
       personByPhoneArr = fillFieldsWithData(data);
@@ -389,7 +390,7 @@ function menuItemClicked(evt) {
         function makeFinalAddHobbyArray() {
           let arr = sendHobbies.join(",");
           console.log(arr);
-          fetch("http://localhost:8080/ca2/api/hobbies/" + arr)
+          fetch(URL + "ca2/api/hobbies/" + arr)
             .then(res => res.json())
             .then(data => {
               console.log("Retrieved following hobbies: " + data);
@@ -425,7 +426,7 @@ function menuItemClicked(evt) {
                 }).replace()
               }
               console.log(options);
-              fetch("http://localhost:8080/ca2/api/persons/create/", options)
+              fetch(URL + "ca2/api/persons/create/", options)
                 .then(response => response.json())
                 .then(json => console.log("hej", json))
                 .catch(err => console.log(err));
@@ -548,7 +549,7 @@ let stringJson ="";
    function makeFinalAddHobbyArrayForEdit() {
      let arr = sendHobbiesForEdit.join(",");
      console.log("sent String: " + arr);
-     fetch("http://localhost:8080/ca2/api/hobbies/" + arr)
+     fetch(URL + "ca2/api/hobbies/" + arr)
        .then(res => res.json())
        .then(data => {
          console.log("Retrieved following hobbies2: " + data);
@@ -582,7 +583,7 @@ let stringJson ="";
            }).replace()
          }
          console.log(options);
-         fetch("http://localhost:8080/ca2/api/persons/update/"+phoneNrForURL, options)
+         fetch(URL + "ca2/api/persons/update/"+phoneNrForURL, options)
            .then(response => response.json())
            .then(json => console.log("updated", json))
            .catch(err => console.log(err));
@@ -591,9 +592,6 @@ let stringJson ="";
    }
 
  };
-
-
-
 
       break
 
